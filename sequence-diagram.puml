@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant loop
+participant UltrasonicSensor
+participant LEDController
+
+User -> loop: Execute loop()
+loop -> UltrasonicSensor: getDistance()
+UltrasonicSensor --> loop: return distance
+loop -> LEDController: blinkLED(ledPinToBlink)
+LEDController --> loop: Manage LED state
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+
+class UltrasonicSensor {
+  - int trigPin
+  - int echoPin
+  + UltrasonicSensor(int trigPin, int echoPin)
+  + long getDistance()
+}
+
+class LEDController {
+  - int ledPins[3]
+  - unsigned long previousMillis
+  - const long interval
+  - bool ledStates[3]
+  + LEDController(int pin1, int pin2, int pin3, long interval)
+  + void blinkLED(int ledPinToBlink)
+}
+
+class Program {
+  - const int LEDPINS[3] = {27, 26, 25}
+  - const int TRIG_PIN = 22
+  - const int ECHO_PIN = 23
+  - const long INTERVAL = 300
+  - UltrasonicSensor sensor
+  - LEDController ledController
+  + void setup()
+  + void loop()
+}
+
+UltrasonicSensor --> LEDController : "Provides distance to"
+Program --> UltrasonicSensor : "Uses"
+Program --> LEDController : "Uses"
+
+@enduml
